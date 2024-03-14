@@ -13,7 +13,7 @@ class Dispatcher
   public function dispatch()
   {
     $method = $_SERVER['REQUEST_METHOD'];
-    $url = "/".explode("/",$_SERVER['REQUEST_URI'])[3];
+    $url = "/".explode("/",$_SERVER['REQUEST_URI'])[4];
 
 
     $route = $this->routes->getRouteByUri($url);

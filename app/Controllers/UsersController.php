@@ -10,44 +10,39 @@ class UsersController
   {
     $json_data = file_get_contents('php://input');
 
-    $data = json_decode($json_data,true);
+    $data = json_decode($json_data, true);
     $user = [
-        "name" =>  $data['name'],
-        "last_name" =>  $data['last_name'],
-        "age" =>  $data['age'],
-        "email" =>  $data['email']
+      "name" =>  $data['name'],
+      "last_name" =>  $data['last_name'],
+      "age" =>  $data['age'],
+      "email" =>  $data['email']
     ];
     echo Users::insert($user);
 
 
-    //echo Users::insert($data);
+
   }
 
   public function delete()
   {
-    $json_data = file_get_contents('php://input');
 
-    $data = json_decode($json_data,true);
     
-    echo Users::delete($data['id']);
-
+    $id = explode("/",$_SERVER['REQUEST_URI'])[5];
+    var_dump($id);
+    echo Users::delete($id);
   }
+
+
 
   public function update()
   {
     $json_data = file_get_contents('php://input');
+    $data = json_decode($json_data, true);
 
-    $data = json_decode($json_data,true);
-    
-    echo Users::update($data['id'], "name", "Loaiza");
+    $id = explode("/",$_SERVER['REQUEST_URI'])[5];
 
+    $response = Users::update($id, $data);
+
+    echo $response;
   }
-
-
-
-
-
-  
-
-
 }
